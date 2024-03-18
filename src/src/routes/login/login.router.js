@@ -4,7 +4,7 @@ class MatematicasRouter {
     static get routes() {
       const router = Router();
   
-      router.get("/operacion/:year", (req, res) => {
+      router.get("/:year", (req, res) => {
         const auxyear = parseInt(req.params.year);
         const currentDate = new Date().getFullYear();
         let age = currentDate - auxyear;

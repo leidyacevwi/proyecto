@@ -2,6 +2,7 @@
 const express =  require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const dbConecction = require('../database/connections');
 
 
 class Server{
@@ -21,7 +22,9 @@ class Server{
     }
 
     start(){
+
         this.middlewares();
+        dbConecction()
         this.app.listen(this.port, ()=>{ 
         console.log(`inicialización...${this.port}`);
         })

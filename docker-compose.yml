@@ -16,5 +16,19 @@ services:
       sh -c "npm run dev"
     volumes:
       - ./src/src:/app/src
+  
+  mongo-db:
+    image: mongo:7.0.6
+    restart: unless-stopped
+    hostname: database
+    container_name: database
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: proyecto
+      MONGO_INITDB_ROOT_PASSWORD: reto
+    volumes:
+      - ./mongo/:/data/db
+
 
 
