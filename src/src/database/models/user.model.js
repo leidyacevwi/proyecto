@@ -8,14 +8,30 @@ const Schema = mongoose.Schema;
 
 //se crea una instancia del modelo de como voy a enviar los datos
 const userSchema = new Schema({
-    name: String,
+    name: {
+      type: String,
+      required: true,
+
+    },
     email: {
         type: String,
-        unique: true // para que solo se pueda registrar mediante un correo
+        required: true,
+        unique: true, // para que solo se pueda registrar mediante un correo
+        
     },
-    password: String
+    password: {
+        type:String,
+        required:true
+    },
+    state:{
+      type: Number,
+      required: false,
+      default: 0
+      
+    }
   });
+
   
 const User = mongoose.model('User', userSchema);
 
-  module.exports = User
+  module.exports = User;
