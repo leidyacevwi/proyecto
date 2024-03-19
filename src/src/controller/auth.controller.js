@@ -1,20 +1,33 @@
-const {Request, Response} = require("express");
-
+const {request, response} = require("express");
+const User = require('../database/models/user.model')
 class AuthController {
-    
-    static get routes(){}
 
 
-    registerUser = (req = Request, res = Response) => {
-        res.json ('registerUser')
+
+    static registerUser = async(req = request, res = response) => {
+
+        try {
+            const data = req.body;
+            const user = new User(data);
+            await user.save();
+            return res.json(data)
+
+        } catch (error) {
+            console.error(error);
+            return res.json({
+                data: "pailas"
+            })
+        }
     }
+    static loginUser = async(req = request, res = response) => {
 
-    loginUser = (req = Request, res = Response) => {
-        res.json ('registerUser')
-    }
-
-    validateEmail = (req = Request, res = Response) => {
-        res.json ('registerUser')
+        try {
+            
+           
+        } catch (error) {
+  
+            
+        }
     }
 }
 

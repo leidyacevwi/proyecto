@@ -1,6 +1,5 @@
 const { Router } = require("express");
-const MatematicasRouter = require("./login/login.router");
-const { AuthController } = require("../controller/auth.controller");
+const AuthRouter = require("./authroutes/auth.router");
 
 class AppRouter {
     static get routes() {
@@ -12,9 +11,9 @@ class AppRouter {
 
         // const controller =  AuthController()
 
-        // router.post('/login', controller.loginUser);
+        // router.post('/login', AuthController);
         // router.use('/register', controller.registerUser);
-        router.use("/api/v1/login", MatematicasRouter.routes);
+        router.use("/api/v1/auth", AuthRouter.routes);
 
         return router;
     }
