@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const  AuthController = require("../../controller/auth.controller");
+const verifyToken = require("../../middlewares/validate.token");
 
 
 class AuthRouter {
@@ -14,6 +15,7 @@ class AuthRouter {
       // });
       router.post("/register", AuthController.registerUser)
       router.post("/login", AuthController.loginUser)
+      router.get("/list", verifyToken, AuthController.list)
       return router;
     }
   }
