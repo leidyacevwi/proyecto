@@ -48,37 +48,37 @@ class AuthController {
         }
     }
 
-    static recoveryPassword = async (req = request, res = response) => {
-        try {
-          let { email } = req.body;
-          const dbConnection = req.clientConnection;
-          const userModel = new User(dbConnection);
-          const user = await userModel.findByEmail(email);
-          if (!user) return res.notFound("User not exist");
+    // static recoveryPassword = async (req = request, res = response) => {
+    //     try {
+    //       let { email } = req.body;
+    //       const dbConnection = req.clientConnection;
+    //       const userModel = new User(dbConnection);
+    //       const user = await userModel.findByEmail(email);
+    //       if (!user) return res.notFound("User not exist");
 
-        //   const { state } = user;
-        //   if (!state) return res.unauthorized("User is not active");
+    //     //   const { state } = user;
+    //     //   if (!state) return res.unauthorized("User is not active");
         
-          const code = Math.floor(Math.random() * 900000) + 100000;
-          await userModel.updateColumnByUserId(user.id_user, { user_code: code });
-          const sendEmail = await sendRecoveryCode(email, code);
-          if (!sendEmail)
-            throw CustomError.notFound(
-              "An error occurred while sending the recovery email"
-            );
-          return res.status(200).json({
-            status: true,
-            data: null,
-            error: null,
-          });
-        } catch (error) {
-            return res.status(404).json({ error: "The " });
-        } finally {
-          if (req.clientConnection) {
-            await req.clientConnection.destroy();
-          }
-        }
-      };
+    //       const code = Math.floor(Math.random() * 900000) + 100000;
+    //       await userModel.updateColumnByUserId(user.id_user, { user_code: code });
+    //       const sendEmail = await sendRecoveryCode(email, code);
+    //       if (!sendEmail)
+    //         throw CustomError.notFound(
+    //           "An error occurred while sending the recovery email"
+    //         );
+    //       return res.status(200).json({
+    //         status: true,
+    //         data: null,
+    //         error: null,
+    //       });
+    //     } catch (error) {
+    //         return res.status(404).json({ error: "The " });
+    //     } finally {
+    //       if (req.clientConnection) {
+    //         await req.clientConnection.destroy();
+    //       }
+    //     }
+    //   };
 }
 
 module.exports = AuthController;
